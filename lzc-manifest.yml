@@ -1,0 +1,33 @@
+usage: |
+  LogVar 弹幕 API 是一台运行在懒猫微服上的弹幕服务，兼容弹弹play接口规范，可为播放器、自建媒体库和相关客户端提供弹幕搜索、剧集匹配、弹幕获取及 JSON/XML 格式输出能力。
+
+  使用方法：
+  1. 打开应用即可进入 Web 管理界面，可配置 API 访问令牌、数据源顺序、VOD 服务器、代理/反代、缓存策略、请求限流、弹幕过滤、简繁转换、弹幕偏移、AI 匹配等选项
+  2. API 接口：GET /api/v2/search/anime?keyword=关键词、POST /api/v2/match、GET /api/v2/comment/:commentId?format=json、POST /api/v2/segmentcomment 等
+  3. 常见配置可在安装时通过懒猫部署参数界面完成，配置和缓存数据持久化保存
+
+  说明：
+  - 数据保存在 /lzcapp/var 下，升级/重启不会丢失
+  - 默认访问令牌 TOKEN=87654321，可在管理界面或部署参数中修改
+  - 本应用仅提供弹幕查询、匹配与接口转换服务，不提供视频播放内容，也不内置影视资源
+
+application:
+  subdomain: danmu-api
+  upstreams:
+    - location: /
+      backend: http://danmu.cloud.lazycat.app.danmu-api.lzcapp:9321
+      disable_trim_location: true
+
+services:
+  danmu:
+    image: registry.lazycat.cloud/wans/logvar/danmu-api:a3e76c7b9da528bc
+    binds:
+      - /lzcapp/var/config:/app/config
+      - /lzcapp/var/cache:/app/.cache
+    environment:
+      # 参数改为可选后，未填写时用 or 兜底到与 deploy_params.yml default_value 一致的值，
+      # 避免渲染出 <no value>。安装后已实测容器 env 取到正确值。
+      - TOKEN={{ or (index .U "token") "87654321" }}
+      - ADMIN_TOKEN={{ or (index .U "admin_token") "" }}
+      - DANMU_OUTPUT_FORMAT={{ or (index .U "danmu_output_format") "json" }}
+      - SOURCE_ORDER={{ or (index .U "source_order") "douban,360,renren,hanjutv" }}

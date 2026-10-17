@@ -1,0 +1,6 @@
+pkgout: dist
+icon: icon.png
+contentdir: content
+manifest: lzc-manifest.yml
+package: package.yml
+deployparams: deploy_params.yml
