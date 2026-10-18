@@ -10,17 +10,16 @@ usage: |
   - 数据保存在 /lzcapp/var 下，升级/重启不会丢失
   - 默认访问令牌 TOKEN=87654321，可在管理界面或部署参数中修改
   - 本应用仅提供弹幕查询、匹配与接口转换服务，不提供视频播放内容，也不内置影视资源
-
 application:
   subdomain: danmu-api
   upstreams:
     - location: /
       backend: http://danmu.cloud.lazycat.app.danmu-api.lzcapp:9321
       disable_trim_location: true
-
 services:
   danmu:
-    image: registry.lazycat.cloud/wans/logvar/danmu-api:a3e76c7b9da528bc
+    # upstream: docker.io/logvar/danmu-api:1.21.6
+    image: registry.lazycat.cloud/wans/logvar/danmu-api:c95298f03cc1999c
     binds:
       - /lzcapp/var/config:/app/config
       - /lzcapp/var/cache:/app/.cache

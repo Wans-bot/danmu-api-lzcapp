@@ -1,5 +1,5 @@
 package: cloud.lazycat.app.danmu-api
-version: 1.21.5-1
+version: 1.21.6
 name: LogVar 弹幕 API
 description: 一个人人都能部署的弹幕 API 服务器，支持爱优腾芒哔咪人韩巴狐乐西埋帆红弹幕获取，兼容弹弹play接口规范，提供 Web 管理界面
 author: huangxd-
@@ -14,11 +14,8 @@ locales:
   zh-CN:
     name: LogVar 弹幕 API
     description: >-
-      一个人人都能部署的弹幕 API 服务器，支持爱优腾芒哔咪人韩巴狐乐西埋帆红弹幕直接获取，兼容弹弹play的搜索、详情查询和弹幕获取接口规范，提供
-      Web 管理界面
+      一个人人都能部署的弹幕 API 服务器，支持爱优腾芒哔咪人韩巴狐乐西埋帆红弹幕直接获取，兼容弹弹play的搜索、详情查询和弹幕获取接口规范，提供 Web 管理界面
   en-US:
     name: LogVar Barrage API
     description: >-
-      A barrage API service compatible with the bullet play interface
-      specification, provides barrage search, matching, acquisition, format
-      conversion and management configuration capabilities
+      A barrage API service compatible with the bullet play interface specification, provides barrage search, matching, acquisition, format conversion and management configuration capabilities
